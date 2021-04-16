@@ -5,7 +5,6 @@ import (
 	"time"
 	"github.com/aws/aws-lambda-go/lambda"
 	"net/http"
-	//"strings"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/signer/v4"
 	"io/ioutil"
@@ -25,7 +24,7 @@ func Handler() (Response, error) {
   endpoint := "https://search-my-project-2-biohsm5dz4d6hd5ggjyhplgqwm.ap-south-1.es.amazonaws.com/border_free_new/_search?size=500"
 
 
-  //body := strings.NewReader(json)
+  
 
   // Get credentials from environment variables and create the AWS Signature Version 4 signer
   credentials := credentials.NewEnvCredentials()
@@ -36,12 +35,8 @@ func Handler() (Response, error) {
 
   // Form the HTTP request
   req, _ := http.NewRequest(http.MethodGet, endpoint, nil)
-  
-  /*if(err != nil){
-  	fmt.Println(err)
-  	return
-  }*/
-  //req.Header.Add("Content-Type", "application/json")
+
+
   region := "ap-south-1" // e.g. us-east-1
   service := "es"
   // Sign the request, send it, and print the response
@@ -49,21 +44,11 @@ func Handler() (Response, error) {
   
   
   respe, _ := client.Do(req)
-  /*if(err != nil){
-  	fmt.Println(err)
-  	return
-  }*/
+
   
   ResponseBody, _ := ioutil.ReadAll(respe.Body)
   
-  /*if(err != nil){
-  	fmt.Println(err)
-  	return
-  }*/
-  
-  //http.ResponseWriter.Header().Set("Access-Control-Allow-Origin","*")
-  
-  fmt.Println("response body : " , string(ResponseBody) )
+
   
   return Response{
             StatusCode: 200,
